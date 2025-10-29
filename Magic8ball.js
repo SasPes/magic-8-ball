@@ -31,11 +31,11 @@ function drawTitle() {
     display.setTextSize(1);
 }
 
-function drawBall8(image) {
+function drawBall8(image, color) {
     var BALL_SIZE = 64;
     var x = Math.round(displayWidth * 0.2 - BALL_SIZE / 2);
     var y = Math.round((displayHeight - BALL_SIZE) / 2);
-    display.drawXBitmap(x, y, image, BALL_SIZE, BALL_SIZE, priColor, bgColor);
+    display.drawXBitmap(x, y, image, BALL_SIZE, BALL_SIZE, color, bgColor);
     return {x: x, y: y, size: BALL_SIZE};
 }
 
@@ -52,7 +52,7 @@ function pressSelForNext() {
 
 function showInstructions() {
     drawTitle();
-    var b = drawBall8(ball8);
+    var b = drawBall8(ball8, priColor);
     display.setTextSize(3);
     var line1 = "Ask a";
     var line2 = "question";
@@ -69,16 +69,18 @@ function showInstructions() {
 
 function showThinking() {
     drawTitle();
-    var b = drawBall8(ball8thinking);
+    var b = drawBall8(ball8thinking, secColor);
     display.setTextSize(3);
+    display.setTextColor(secColor);
     var textX = Math.min(b.x + b.size + 12, displayWidth - 180);
     var textY = b.y + Math.round((b.size - 24) / 2); // roughly centered vertically beside ball
     display.drawString("Thinking...", textX, textY);
+    display.setTextColor(priColor);
 }
 
 function showAnswer(answer) {
     drawTitle();
-    var b = drawBall8(ball8);
+    var b = drawBall8(ball8, priColor);
 
     var FONT_SIZE = 3;
     display.setTextSize(FONT_SIZE);
